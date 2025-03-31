@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Match</title>
+    <style>
+        /* general */
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1E90FF;
+            font-size: 2.5rem;
+            margin-bottom: 1px;
+            text-transform: uppercase;
+        }
+
+        /* form stuff */
+        form {
+            background-color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            text-align: left;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #444;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        input[type="file"]:hover {
+            background-color: #555;
+            transition: 0.2s ease;
+        }
+
+        button {
+            background-color: #1E90FF;
+            color: white;
+            padding: 12px 80px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0F70D4;
+            scale: 1.05;
+            transition: 0.3s ease;
+        }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            form {
+                padding: 20px;
+            }
+
+            button {
+                font-size: 1rem;
+            }
+        }
+
+        /* buttons :))) */
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* link Styles */
+        a {
+            color: white;
+        }
+
+        a:hover{
+            transition: 0.3s ease;
+            color: #1E90FF;
+        }
+
+        /* process message style */
+        #processingMessage {
+            display: none;
+            color: #FFD700;
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* error message style */
+        #errorMessage {
+            display: none;
+            color: red;
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Face Comparison</h1>
+    <h3><a href="https://github.com/neur0n-7/">Support me on GitHub: github.com/neur0n-7</a></h3>
+    <form action="/" method="post" enctype="multipart/form-data" id="comparisonForm">
+        <div>
+            <label for="image1">Select images:</label>
+            <input type="file" name="image1" id="image1" required>
+        </div>
+        <div>
+            <input type="file" name="image2" id="image2" required>
+        </div>
+        <div>
+            <button type="submit">Compare Faces</button>
+        </div>
+    </form>
+
+    <div id="processingMessage">Processing...</div>
+    <div id="errorMessage">Please upload valid image files (png, jpg, jpeg, heic, avif, webp).</div>
+
+    <br>
+    
+    <script>
+        const form = document.getElementById('comparisonForm');
+        const processingMessage = document.getElementById('processingMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // Allowed image extensions
+        const allowedExtensions = ['png', 'jpg', 'jpeg', 'heic', 'avif', 'webp'];
+
+        form.addEventListener('submit', function(event) {
+            const file1 = document.getElementById('image1').files[0];
+            const file2 = document.getElementById('image2').files[0];
+
+            const ext1 = file1.name.split('.').pop().toLowerCase();
+            const ext2 = file2.name.split('.').pop().toLowerCase();
+
+            // check if the file extensions are allowed
+            if (!allowedExtensions.includes(ext1) || !allowedExtensions.includes(ext2)) {
+                errorMessage.style.display = 'block';
+                processingMessage.style.display = 'none';
+                event.preventDefault(); // prevent form submission
+            } else {
+                errorMessage.style.display = 'none';
+                processingMessage.style.display = 'block'; // Show processing message
+            }
+        });
+    </script>
+</body>
+</html>
