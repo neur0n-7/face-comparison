@@ -18,6 +18,7 @@
             height: 100vh;
             flex-direction: column;
             text-align: center;
+            overflow: hidden;
         }
 
         h1 {
@@ -31,11 +32,11 @@
             background-color: #333;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 600px;
             text-align: left;
             margin-bottom: 20px;
+            box-shadow: 0 0 20px {% if match %}#00ff00{% else %}#ff0000{% endif %};
         }
 
         p {
@@ -62,6 +63,30 @@
             background-color: #0F70D4;
         }
 
+        /* Confetti animation */
+        .confetti {
+            position: absolute;
+            top: -50px;
+            font-size: 2rem;
+            animation: fall linear forwards;
+            opacity: 0.9;
+        }
+
+        @keyframes fall {
+            0% { 
+                transform: translateY(-50px) rotate(0deg); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg); 
+                opacity: 0; 
+            }
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(100px); }
+        }
+
         @media screen and (max-width: 600px) {
             h1 {
                 font-size: 2rem;
@@ -76,7 +101,6 @@
                 padding: 10px 20px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -93,5 +117,35 @@
         {% endif %}
     </div>
     <a href="/">Try Again</a>
+
+    <script>
+        function createConfetti(symbol, color) {
+            for (let i = 0; i < 30; i++) {
+                let confetti = document.createElement("span");
+                confetti.classList.add("confetti");
+                confetti.innerHTML = symbol;
+                confetti.style.color = color;
+                confetti.style.left = Math.random() * 100 + "vw"; // random horizontal position
+                confetti.style.fontSize = (Math.random() * 1.5 + 1) + "rem"; // random size between 1rem and 2.5rem
+
+                // Randomize rotation and animation duration (speed)
+                const rotation = Math.random() * 360; // random rotation
+                const duration = Math.random() * 2 + 2; // random duration between 2s and 4s
+                confetti.style.transform = `rotate(${rotation}deg)`;
+                confetti.style.animationDuration = duration + "s";
+
+                document.body.appendChild(confetti);
+
+                // Remove confetti after animation ends
+                setTimeout(() => confetti.remove(), duration * 1000); // Remove after the animation duration
+            }
+        }
+
+        {% if match %}
+            createConfetti("🎉", "#00FF00"); // Green checkmarks for Match
+        {% else %}
+            createConfetti("💔", "#FF0000"); // Red Xs for No Match
+        {% endif %}
+    </script>
 </body>
 </html>
