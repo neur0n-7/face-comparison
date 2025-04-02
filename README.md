@@ -6,5 +6,6 @@ Uses DeepFace: see it on [GitHub](https://github.com/serengil/deepface).
 
 Doesn't work with files other than .jpg for some reason? 
 
-![Screenshot 2025-03-31 160457](https://github.com/user-attachments/assets/1bf9dc45-2a72-4586-8e5b-5897c806fbb6)
-![Screenshot 2025-03-31 160545](https://github.com/user-attachments/assets/f85c6de0-29fd-48ce-b629-a0a874d450c6)
+![Screenshot 2025-04-01 150831](https://github.com/user-attachments/assets/b803169c-d119-423c-bced-5ba0176cbbc0)
+![Screenshot 2025-04-01 151114](https://github.com/user-attachments/assets/10d0274e-4379-417a-97ef-4f8889c977da)
+
