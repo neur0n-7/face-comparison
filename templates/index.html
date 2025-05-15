@@ -27,7 +27,7 @@
             text-transform: uppercase;
         }
 
-        /* GitHub support link */
+        /* github support link :)))))))))*/
         h3 {
             color: white;
             font-weight: 100;
@@ -44,7 +44,6 @@
             transition: 0.3s ease;
         }
 
-        /* form container */
         form {
             background-color: #333;
             padding: 30px;
@@ -54,7 +53,6 @@
             max-width: 500px;
         }
 
-        /* File input container */
         .file-input-container {
             display: flex;
             flex-direction: column;
@@ -85,7 +83,7 @@
         }
 
         input[type="file"] {
-            display: none; /* Hide the ugly default file input */
+            display: none; /* hide ugly default file input */
         }
 
         /* preview container */
@@ -101,12 +99,12 @@
             height: 200px;
             object-fit: cover;
             border-radius: 10px;
-            display: none; /* Hide until an image is selected */
+            display: none;
             border: 2px solid #1E90FF;
         }
 
         button {
-            background-color: #1E90FF; /* Normal blue background */
+            background-color: #1E90FF;
             color: white;
             padding: 12px 80px;
             border-radius: 8px;
@@ -118,7 +116,7 @@
         }
 
         button:hover {
-            background: linear-gradient(45deg, #1E90FF, #8A2BE2, #6809ab, #6A5ACD); /* Swirling blue and purple gradient */
+            background: linear-gradient(45deg, #1E90FF, #8A2BE2, #6809ab, #6A5ACD);
             background-size: 400% 400%;
             animation: swirl 5s ease infinite;
             scale: 1.07;
@@ -126,16 +124,14 @@
 
         }
 
-        /* Processing state styles */
         .processing {
             background: linear-gradient(45deg, #1E90FF, #8A2BE2, #6809ab, #6A5ACD); /* Gradient animation */
             background-size: 400% 400%;
             animation: swirl 5s ease infinite;
-            scale: 1.07; /* Keep the scaled-up state */
-            cursor: not-allowed; /* Set cursor to not-allowed */
+            scale: 1.07;
+            cursor: not-allowed;
         }
 
-        /* Swirling animation effect */
         @keyframes swirl {
             0% {
                 background-position: 0% 50%;
@@ -197,7 +193,7 @@
                 };
                 reader.readAsDataURL(input.files[0]);
 
-                // Show the truncated filename
+                // show filename
                 fileNameElement.textContent = truncateFilename(input.files[0].name);
             } else {
                 previewElement.style.display = "none";
@@ -205,7 +201,7 @@
             }
         }
 
-        // Add event listeners to input fields
+        // +event listeners: input fields
         document.getElementById("image1").addEventListener("change", function() {
             previewImage(this, document.getElementById("preview1"), document.getElementById("fileName1"));
         });
@@ -214,15 +210,14 @@
             previewImage(this, document.getElementById("preview2"), document.getElementById("fileName2"));
         });
 
-        // Handle form submission to show "Processing..."
         document.getElementById("comparisonForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the form from submitting immediately
+            event.preventDefault();
             const submitBtn = document.getElementById("submitBtn");
-            submitBtn.innerText = "Processing..."; // Change button text
-            submitBtn.disabled = true; // Disable the button
-            submitBtn.classList.add("processing"); // Add processing class to keep animations
+            submitBtn.innerText = "Processing...";
+            submitBtn.disabled = true;
+            submitBtn.classList.add("processing");
 
-            this.submit(); // Submit the form after updating the button
+            this.submit();
         });
     </script>
 </body>
